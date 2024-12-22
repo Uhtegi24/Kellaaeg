@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Countdown Timer</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      background: url('taust.gif') no-repeat center center fixed;
+      background-size: cover;
+      color: #ffffff;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      position: relative;
+      overflow: hidden;
+    }
+    h1 {
+      font-size: 3rem;
+      text-shadow: 2px 2px 4px #000000; /* Add a shadow for better visibility */
+    }
+    #countdown {
+      font-size: 2rem;
+      margin-top: 20px;
+      text-shadow: 2px 2px 4px #000000; /* Add a shadow for better visibility */
+    }
+    /* Image in the bottom-left corner */
+    img.bottom-left {
+      position: absolute;
+      bottom: 20px;
+      left: 20px;
+      width: 200px; /* Adjust size */
+      height: auto;
+      border-radius: 10px;
+    }
+    /* GIF in the bottom-right corner */
+    img.bottom-right {
+      position: absolute;
+      bottom: 20px;
+      right: 20px;
+      width: 300px; /* Adjust size */
+      height: auto;
+    }
+  </style>
+</head>
+<body>
+  <h1>Eksamid on tulekul......</h1>
+  <div id="countdown">Loading...</div>
+  <!-- Image in the bottom-left corner -->
+  <img src="taylor.jpg" alt="Countdown Image" class="bottom-left">
+  <!-- GIF in the bottom-right corner -->
+  <img src="kanye.gif" alt="Animated GIF" class="bottom-right">
+
+  <script>
+    function updateCountdown() {
+      const targetDate = new Date("2026-04-28T07:00:00Z"); // Convert GMT+2 to UTC
+      const now = new Date();
+      const diff = targetDate - now;
+
+      if (diff <= 0) {
+        document.getElementById("countdown").innerHTML = "Eksamid on saabunud";
+        clearInterval(interval);
+        return;
+      }
+
+      // Calculate time components correctly to prevent the "loop" issue
+      const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+      const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+
+      // Update the countdown display
+      document.getElementById("countdown").innerHTML = `
+        ${days} päeva ${hours} tundi ${minutes} minutit ${seconds} sekundit
+      `;
+    }
+
+    // Update the countdown every second
+    const interval = setInterval(updateCountdown, 1000);
+    updateCountdown();
+  </script>
+</body>
+</html>
